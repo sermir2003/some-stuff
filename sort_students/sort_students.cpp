@@ -1,67 +1,73 @@
 #include <algorithm>
 #include "sort_students.h"
 
-int comparingDates(const Date& dateA, const Date& dateB) {
-    // Returns -1 if dateA < dateB,
-    // 0 if dateA == dateB,
-    // 1 if dateA > dateB.
-    if (dateA.year < dateB.year)
+int ComparingDates(const Date& date1, const Date& date2) {
+    // Returns -1 if date1 < date2,
+    // 0 if date1 == date2,
+    // 1 if date1 > date2.
+    if (date1.year < date2.year) {
         return -1;
-    else if (dateA.year > dateB.year)
+    } else if (date1.year > date2.year) {
         return 1;
-    if (dateA.month < dateB.month)
+    }
+    if (date1.month < date2.month) {
         return -1;
-    else if (dateA.month > dateB.month)
+    } else if (date1.month > date2.month) {
         return 1;
-    if (dateA.day < dateB.day)
+    }
+    if (date1.day < date2.day) {
         return -1;
-    else if (dateA.day > dateB.day)
+    } else if (date1.day > date2.day) {
         return 1;
+    }
     return 0;
 }
 
-int comparingNames(const Student& stA, const Student& stB) {
+int ComparingNames(const Student& st1, const Student& st2) {
     // Returns -1 if lexicographically name of student A is earlier than name of student B,
     // 0 if names are the same,
     // 1 if if lexicographically name of student A is later than name of student B.
-    if (stA.last_name < stB.last_name)
+    if (st1.last_name < st2.last_name) {
         return -1;
-    else if (stA.last_name > stB.last_name)
+    } else if (st1.last_name > st2.last_name) {
         return 1;
-    if (stA.name < stB.name)
+    }
+    if (st1.name < st2.name) {
         return -1;
-    else if (stA.name > stB.name)
+    } else if (st1.name > st2.name) {
         return 1;
+    }
     return 0;
 }
 
-bool comparatorByDate(const Student& stA, const Student& stB) {
-    int compDateRes = comparingDates(stA.birth_date, stB.birth_date);
-    if (compDateRes == -1)
+bool ComparatorByDate(const Student& st1, const Student& st2) {
+    int comp_date_res = ComparingDates(st1.birth_date, st2.birth_date);
+    if (comp_date_res == -1) {
         return true;
-    else if (compDateRes == 1)
+    } else if (comp_date_res == 1) {
         return false;
-    else {
-        int compNameRes = comparingNames(stA, stB);
-        return compNameRes != 1;
+    } else {
+        int comp_name_res = ComparingNames(st1, st2);
+        return comp_name_res != 1;
     }
 }
 
-bool comparatorByName(const Student& stA, const Student& stB) {
-    int compNameRes = comparingNames(stA, stB);
-    if (compNameRes == -1)
+bool ComparatorByName(const Student& st1, const Student& st2) {
+    int comp_name_res = ComparingNames(st1, st2);
+    if (comp_name_res == -1) {
         return true;
-    else if (compNameRes == 1)
+    } else if (comp_name_res == 1) {
         return false;
-    else {
-        int compDateRes = comparingDates(stA.birth_date, stB.birth_date);
-        return compDateRes != 1;
+    } else {
+        int comp_date_res = ComparingDates(st1.birth_date, st2.birth_date);
+        return comp_date_res != 1;
     }
 }
 
-void SortStudents(std::vector<Student>& students, SortKind sortKind) {
-    if (sortKind == SortKind::Date)
-        std::sort(students.begin(), students.end(), comparatorByDate);
-    else if (sortKind == SortKind::Name)
-        std::sort(students.begin(), students.end(), comparatorByName);
+void SortStudents(std::vector<Student>& students, SortKind sort_kind) {
+    if (sort_kind == SortKind::Date) {
+        std::sort(students.begin(), students.end(), ComparatorByDate);
+    } else if (sort_kind == SortKind::Name) {
+        std::sort(students.begin(), students.end(), ComparatorByName);
+    }
 }
