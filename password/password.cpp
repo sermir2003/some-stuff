@@ -4,7 +4,7 @@
 const int minRangeAllowedSymbols = 33;
 const int maxRangeAllowedSymbols = 126;
 const int minPasswordLength = 8;
-const int maxPasswordLength = 8;
+const int maxPasswordLength = 14;
 
 bool ValidatePassword(const std::string& password) {
     // first restriction
