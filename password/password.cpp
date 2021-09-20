@@ -1,20 +1,20 @@
 #include <cctype>
 #include "password.h"
 
-const int minRangeAllowedSymbols = 33;
-const int maxRangeAllowedSymbols = 126;
-const int minPasswordLength = 8;
-const int maxPasswordLength = 14;
+const int MIN_RANGE_ALLOWED_SYMBOLS = 33;
+const int MAX_RANGE_ALLOWED_SYMBOLS = 126;
+const int MIN_PASSWORD_LENGTH = 8;
+const int MAX_PASSWORD_LENGTH = 14;
 
 bool ValidatePassword(const std::string& password) {
     // first restriction
     for (char elem : password) {
-        if (elem < minRangeAllowedSymbols || maxRangeAllowedSymbols < elem) {
+        if (elem < MIN_RANGE_ALLOWED_SYMBOLS || MAX_RANGE_ALLOWED_SYMBOLS < elem) {
             return false;
         }
     }
     // second restriction
-    if (password.length() < minPasswordLength || password.length() > maxPasswordLength) {
+    if (password.length() < MIN_PASSWORD_LENGTH || password.length() > MAX_PASSWORD_LENGTH) {
         return false;
     }
     // third restriction
