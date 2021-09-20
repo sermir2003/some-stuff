@@ -1,7 +1,7 @@
-#include "utf8.h"
 #include <cstddef>
-#include <vector>
 #include <string>
+#include "utf8.h"
+#include <vector>
 
 
 const int32_t CNT_BIT_IN_BYTE = 8;
