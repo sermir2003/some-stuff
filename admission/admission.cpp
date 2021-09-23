@@ -1,5 +1,4 @@
 #include "admission.h"
-#include <algorithm>
 #include <map>
 #include <string>
 #include <tuple>
