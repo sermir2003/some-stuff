@@ -1,6 +1,5 @@
 #include "admission.h"
-#include <map>
-#include <tuple>
+//#include <map>
 
 AdmissionTable FillUniversities(const std::vector<University>& universities, const std::vector<Applicant>& applicants) {
     std::vector<const Applicant*> ordered_applicants(applicants.size(), nullptr);
@@ -9,13 +8,13 @@ AdmissionTable FillUniversities(const std::vector<University>& universities, con
     }
     std::sort(ordered_applicants.begin(), ordered_applicants.end(), [] (const Applicant* const  ap1,
                                                                        const Applicant* const ap2) {
-        return std::make_tuple(-ap1->points, ap1->student.birth_date.year, ap1->student.birth_date.month,
-                               ap1->student.birth_date.day, ap1->student.name) <
-               std::make_tuple(-ap2->points, ap2->student.birth_date.year, ap2->student.birth_date.month,
-                               ap2->student.birth_date.day, ap2->student.name);
+        return std::tuple(-ap1->points, ap1->student.birth_date.year, ap1->student.birth_date.month,
+                        ap1->student.birth_date.day, ap1->student.name) <
+               std::tuple(-ap2->points, ap2->student.birth_date.year, ap2->student.birth_date.month,
+                        ap2->student.birth_date.day, ap2->student.name);
     });
 
-    std::map<std::string, size_t> cnt_place_for_university;
+    std::unordered_map<std::string, size_t> cnt_place_for_university;
     for (const University& college : universities) {
         cnt_place_for_university[college.name] = college.max_students;
     }
