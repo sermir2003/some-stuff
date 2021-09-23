@@ -1,10 +1,8 @@
 #include "admission.h"
 #include <map>
-#include <string>
 #include <tuple>
 
 AdmissionTable FillUniversities(const std::vector<University>& universities, const std::vector<Applicant>& applicants) {
-    return {};
     std::vector<const Applicant*> ordered_applicants(applicants.size(), nullptr);
     for (size_t i = 0; i < applicants.size(); ++i) {
         ordered_applicants[i] = &applicants[i];
@@ -31,6 +29,13 @@ AdmissionTable FillUniversities(const std::vector<University>& universities, con
                 break;
             }
         }
+    }
+
+    for (auto it = admission_table.begin(); it != admission_table.end(); ++it) {
+        std::sort(it->second.begin(), it->second.end(), [] (const Student* const st1, const Student* const st2) {
+            return std::make_tuple(st1->name, st1->birth_date.year, st1->birth_date.month, st1->birth_date.day) <
+                   std::make_tuple(st2->name, st2->birth_date.year, st2->birth_date.month, st2->birth_date.day);
+        });
     }
     return admission_table;
 }
