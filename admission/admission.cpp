@@ -4,6 +4,7 @@
 #include <tuple>
 
 AdmissionTable FillUniversities(const std::vector<University>& universities, const std::vector<Applicant>& applicants) {
+    return {};
     std::vector<const Applicant*> ordered_applicants(applicants.size(), nullptr);
     for (size_t i = 0; i < applicants.size(); ++i) {
         ordered_applicants[i] = &applicants[i];
