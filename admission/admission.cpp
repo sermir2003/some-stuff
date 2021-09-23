@@ -6,12 +6,12 @@ AdmissionTable FillUniversities(const std::vector<University>& universities, con
         ordered_applicants[i] = &applicants[i];
     }
     std::sort(ordered_applicants.begin(), ordered_applicants.end(),
-              [](const Applicant* const  ap1, const Applicant* const ap2) {
+              [](const Applicant* const ap1, const Applicant* const ap2) {
                   return std::tuple(-ap1->points, ap1->student.birth_date.year, ap1->student.birth_date.month,
                                     ap1->student.birth_date.day, ap1->student.name) <
                          std::tuple(-ap2->points, ap2->student.birth_date.year, ap2->student.birth_date.month,
                                     ap2->student.birth_date.day, ap2->student.name);
-    });
+              });
 
     std::unordered_map<std::string, size_t> cnt_place_for_university;
     for (const University& college : universities) {
