@@ -72,7 +72,9 @@ std::vector<std::string_view> Search(std::string_view text, std::string_view que
     std::cout << "control point 4" << std::endl;
     for (size_t line_num = 0; line_num < lines.size(); ++line_num) {
         std::string_view line = lines[line_num];
+        std::cout << "try SplitLineIntoWords " << line_num << std::endl;
         std::vector<std::string_view> words = SplitLineIntoWords(line);
+        std::cout << "finish SplitLineIntoWords " << line_num << std::endl;
         std::map<std::string_view, uint32_t, CmpCaseInsensitive> cnt_word_in_line;
         for (std::string_view word : words) {
             ++cnt_word_in_line[word];
