@@ -76,9 +76,11 @@ std::vector<std::string_view> Search(std::string_view text, std::string_view que
         std::vector<std::string_view> words = SplitLineIntoWords(line);
         std::cout << "finish SplitLineIntoWords " << line_num << std::endl;
         std::map<std::string_view, uint32_t, CmpCaseInsensitive> cnt_word_in_line;
+        std::cout << "control point A" << std::endl;
         for (std::string_view word : words) {
             ++cnt_word_in_line[word];
         }
+        std::cout << "control point B" << std::endl;
         size_t query_word_num = 0;
         for (std::string_view query_word : query_words_set) {
             cnt_word_for_lines[line_num][query_word_num] = cnt_word_in_line[query_word];
@@ -86,8 +88,10 @@ std::vector<std::string_view> Search(std::string_view text, std::string_view que
                 ++cnt_lines_with_word[query_word_num];
             }
             ++query_word_num;
+            std::cout << "control point C" << std::endl;
         }
         cnt_all_words_in_line[line_num] = words.size();
+        std::cout << "control point D" << std::endl;
     }
     std::cout << "control point 5" << std::endl;
     std::vector<double> idf(query_words_set.size());
