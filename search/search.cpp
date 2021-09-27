@@ -68,7 +68,7 @@ std::vector<std::string_view> Search(std::string_view text, std::string_view que
     std::cout << "control point 3" << std::endl;
     std::vector<std::vector<uint32_t>> cnt_word_for_lines(lines.size(), std::vector<uint32_t>(query_words_set.size()));
     std::vector<uint32_t> cnt_lines_with_word(query_words_set.size());
-    std::vector<uint32_t> cnt_all_words_in_line(query_words_set.size());
+    std::vector<uint32_t> cnt_all_words_in_line(lines.size());
     std::cout << "control point 4" << std::endl;
     for (size_t line_num = 0; line_num < lines.size(); ++line_num) {
         std::string_view line = lines[line_num];
