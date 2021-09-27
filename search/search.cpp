@@ -1,5 +1,6 @@
 #include <cctype>
 #include <cmath>
+#include <iostream>
 #include <map>
 #include "search.h"
 #include <set>
@@ -56,15 +57,19 @@ struct CmpCaseInsensitive {
 };
 
 std::vector<std::string_view> Search(std::string_view text, std::string_view query, size_t results_count) {
+    std::cout << "control point 1" << std::endl;
     std::vector<std::string_view> query_words = SplitLineIntoWords(query);
     std::set<std::string_view, CmpCaseInsensitive> query_words_set;
+    std::cout << "control point 2" << std::endl;
     for (std::string_view word : query_words) {
         query_words_set.insert(word);
     }
     std::vector<std::string_view> lines = SplitTextIntoLines(text);
+    std::cout << "control point 3" << std::endl;
     std::vector<std::vector<uint32_t>> cnt_word_for_lines(lines.size(), std::vector<uint32_t>(query_words_set.size()));
     std::vector<uint32_t> cnt_lines_with_word(query_words_set.size());
     std::vector<uint32_t> cnt_all_words_in_line(query_words_set.size());
+    std::cout << "control point 4" << std::endl;
     for (size_t line_num = 0; line_num < lines.size(); ++line_num) {
         std::string_view line = lines[line_num];
         std::vector<std::string_view> words = SplitLineIntoWords(line);
@@ -82,11 +87,13 @@ std::vector<std::string_view> Search(std::string_view text, std::string_view que
         }
         cnt_all_words_in_line[line_num] = words.size();
     }
+    std::cout << "control point 5" << std::endl;
     std::vector<double> idf(query_words_set.size());
     for (size_t query_word_num = 0; query_word_num < query_words_set.size(); ++query_word_num) {
         idf[query_word_num] =
             std::log(static_cast<double>(lines.size()) / static_cast<double>(cnt_lines_with_word[query_word_num]));
     }
+    std::cout << "control point 6" << std::endl;
     std::vector<std::pair<double, std::string_view>> relevance_line(lines.size());
     for (size_t line_num = 0; line_num < lines.size(); ++line_num) {
         double relevance = 0;
@@ -97,13 +104,16 @@ std::vector<std::string_view> Search(std::string_view text, std::string_view que
         }
         relevance_line[line_num] = {relevance, lines[line_num]};
     }
+    std::cout << "control point 7" << std::endl;
     std::sort(relevance_line.begin(), relevance_line.end(),
               [](std::pair<double, std::string_view> elem1, std::pair<double, std::string_view> elem2) {
                   return elem1.first > elem2.first;
               });
+    std::cout << "control point 8" << std::endl;
     std::vector<std::string_view> answer;
     for (size_t i = 0; i < lines.size() && i < results_count && relevance_line[i].first > 0; ++i) {
         answer.push_back(relevance_line[i].second);
     }
+    std::cout << "control point 9" << std::endl;
     return answer;
 }
