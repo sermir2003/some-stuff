@@ -1,3 +1,4 @@
+#include <cctype>
 #include <cmath>
 #include <map>
 #include "search.h"
