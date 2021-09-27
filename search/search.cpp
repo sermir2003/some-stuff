@@ -9,7 +9,9 @@ std::vector<std::string_view> SplitTextIntoLines(std::string_view text) {
     size_t line_begin = 0;
     for (size_t i = 0; i < text.size(); ++i) {
         if (text[i] == '\n') {
-            lines.push_back(std::string_view(text.data() + line_begin, i - line_begin));
+            if (line_begin < i) {
+                lines.push_back(std::string_view(text.data() + line_begin, i - line_begin));
+            }
             line_begin = i + 1;
         }
     }
