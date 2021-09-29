@@ -46,8 +46,8 @@ void Scorer::Reset() {
 
 ScoreTable Scorer::GetScoreTable() const {
     ScoreTable score_table;
-    for (const auto& [student_name, tasks] : data_) {
-        for (const auto& [task_name, status] : tasks) {
+    for (const auto &[student_name, tasks] : data_) {
+        for (const auto &[task_name, status] : tasks) {
             if (status.is_submit_successful && !status.is_there_merge_request) {
                 score_table[student_name].insert(task_name);
             }
