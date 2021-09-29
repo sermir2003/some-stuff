@@ -18,6 +18,7 @@ struct TaskStatus {
 class Scorer {
 private:
     std::map<StudentName, std::map<TaskName, TaskStatus>> data_;
+
 public:
     void OnCheckFailed(const StudentName& student_name, const TaskName& task_name);
     void OnCheckSuccess(const StudentName& student_name, const TaskName& task_name);
