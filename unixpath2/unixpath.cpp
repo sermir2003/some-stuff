@@ -37,7 +37,7 @@ UnixPath::UnixPath(std::string_view initial_dir) {
     cur_path_ = init_path_;
 }
 
-void UnixPath::ChangeDirectory(std::string_view path)  {
+void UnixPath::ChangeDirectory(std::string_view path) {
     PathTokens change_path = UnixPath::ParsePath(path);
     if (path.empty() || (!path.empty() && path[0] == '/')) {
         cur_path_.clear();
@@ -61,7 +61,8 @@ std::string UnixPath::GetRelativePath() const {
     size_t common_part = 0;
     for (; common_part < std::min(init_path_.size(), cur_path_.size()) &&
            init_path_[common_part] == cur_path_[common_part];
-         ++common_part) {}
+         ++common_part) {
+    }
     std::string result;
     if (common_part < init_path_.size()) {
         result = "..";
