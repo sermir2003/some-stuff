@@ -32,13 +32,17 @@ void UnixPath::NormalizePath(PathTokens& current_working_dir, const PathTokens& 
 }
 
 UnixPath::UnixPath(std::string_view initial_dir) {
-    PathTokens parsed_initial_dir = UnixPath::ParsePath(initial_dir);
+    std::string str(initial_dir.begin(), initial_dir.end());
+    cache_.push_back(str);
+    PathTokens parsed_initial_dir = UnixPath::ParsePath(cache_.back());
     NormalizePath(init_path_, parsed_initial_dir);
     cur_path_ = init_path_;
 }
 
 void UnixPath::ChangeDirectory(std::string_view path) {
-    PathTokens change_path = UnixPath::ParsePath(path);
+    std::string str(path.begin(), path.end());
+    cache_.push_back(str);
+    PathTokens change_path = UnixPath::ParsePath(cache_.back());
     if (path.empty() || (!path.empty() && path[0] == '/')) {
         cur_path_.clear();
     }
