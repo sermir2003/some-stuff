@@ -63,18 +63,19 @@ std::string UnixPath::GetRelativePath() const {
            init_path_[common_part] == cur_path_[common_part];
          ++common_part) {
     }
+    size_t up = init_path_.size() - common_part;
+    size_t down = cur_path_.size() - common_part;
     std::string result;
-    if (common_part < init_path_.size()) {
-        result = "..";
-    } else {
+    if (up == 0) {
         result = "./";
     }
-    for (size_t i = 1; i < init_path_.size() - common_part; ++i) {
-        result += "/..";
+    for (size_t i = 0; i < up; ++i) {
+        result += "../";
     }
-    for (size_t i = common_part; i < cur_path_.size(); ++i) {
+    for (size_t i = 0; i < down; ++i) {
+        result += cur_path_[i + common_part];
         result.push_back('/');
-        result += cur_path_[i];
     }
+    result.pop_back();
     return result;
 }
